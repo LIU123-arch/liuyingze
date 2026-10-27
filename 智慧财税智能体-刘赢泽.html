@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧财税管理智能体</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        light: '#F2F3F5'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .menu-btn.active { background: #E8F3FF; color: #165DFF; font-weight: 600; }
+        .page { animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen">
+        <!-- 侧边栏 -->
+        <aside class="w-64 bg-white shadow-md flex flex-col">
+            <div class="h-16 flex items-center justify-center border-b">
+                <h1 class="text-xl font-bold text-primary">智慧财税智能体</h1>
+            </div>
+            <nav class="flex-1 py-4">
+                <ul class="space-y-1 px-3">
+                    <li><button onclick="showPage('dashboard')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3 active" data-page="dashboard"><i class="fa fa-home"></i> 企业中心</button></li>
+                    <li><button onclick="showPage('upload')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3" data-page="upload"><i class="fa fa-upload"></i> 数据上传</button></li>
+                    <li><button onclick="showPage('tax')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3" data-page="tax"><i class="fa fa-calculator"></i> 计税申报</button></li>
+                    <li><button onclick="showPage('policy')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3" data-page="policy"><i class="fa fa-book"></i> 政策中心</button></li>
+                    <li><button onclick="showPage('risk')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3" data-page="risk"><i class="fa fa-shield"></i> 风险看板</button></li>
+                    <li><button onclick="showPage('chat')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3" data-page="chat"><i class="fa fa-comments"></i> 智能问答</button></li>
+                    <li><button onclick="showPage('notice')" class="menu-btn w-full text-left px-4 py-2.5 rounded hover:bg-blue-50 hover:text-primary flex items-center gap-3" data-page="notice"><i class="fa fa-bell"></i> 消息提醒 <span class="ml-auto bg-danger text-white text-xs px-1.5 rounded-full">3</span></button></li>
+                </ul>
+            </nav>
+            <div class="p-4 border-t text-sm text-gray-500 text-center">
+                教学原型演示版<br>不对接真实税务系统<br>
+                <span class="text-primary font-medium">开发者：刘赢泽</span>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="flex-1 overflow-auto p-6">
+            <!-- 1.企业中心 -->
+            <section id="page-dashboard" class="page">
+                <h2 class="text-2xl font-bold mb-6">企业中心</h2>
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <p class="text-gray-500 text-sm">企业名称</p>
+                        <p class="text-lg font-semibold mt-1">西安赢泽财税咨询有限公司</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <p class="text-gray-500 text-sm">纳税人身份</p>
+                        <p class="text-lg font-semibold mt-1 text-primary">增值税小规模纳税人</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <p class="text-gray-500 text-sm">企业类型</p>
+                        <p class="text-lg font-semibold mt-1 text-success">小型微利企业</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <p class="text-gray-500 text-sm">所属行业</p>
+                        <p class="text-lg font-semibold mt-1">商务服务业</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-semibold mb-3">本期税费概览</h3>
+                        <p class="text-3xl font-bold text-primary">12,450.80 元</p>
+                        <p class="text-sm text-gray-500 mt-1">预计应纳税总额</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-semibold mb-3">可享受优惠减免</h3>
+                        <p class="text-3xl font-bold text-success">8,620.00 元</p>
+                        <p class="text-sm text-gray-500 mt-1">已匹配3项优惠政策</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm">
+                        <h3 class="font-semibold mb-3">涉税风险</h3>
+                        <p class="text-3xl font-bold text-warning">2 项</p>
+                        <p class="text-sm text-gray-500 mt-1">一般风险，建议核查</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2.数据上传 -->
+            <section id="page-upload" class="page hidden">
+                <h2 class="text-2xl font-bold mb-6">数据采集上传</h2>
+                <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                    <h3 class="font-semibold mb-4">结构化财务数据录入</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">本期含税销售收入（元）</label>
+                            <input type="number" id="income" value="420000" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">本期成本费用总额（元）</label>
+                            <input type="number" id="cost" value="280000" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">进项税额（元，一般纳税人填）</label>
+                            <input type="number" id="inputTax" value="0" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">从业人数</label>
+                            <input type="number" id="staff" value="12" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">资产总额（万元）</label>
+                            <input type="number" id="asset" value="180" class="w-full border rounded px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">利润总额（元）</label>
+                            <input type="number" id="profit" value="140000" class="w-full border rounded px-3 py-2">
+                        </div>
+                    </div>
+                    <button onclick="saveData()" class="mt-4 px-5 py-2 bg-primary text-white rounded hover:bg-blue-600">保存数据</button>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-semibold mb-4">非结构化文件上传</h3>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center">
+                        <i class="fa fa-file-text-o text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-gray-500">支持PDF发票、合同扫描件、凭证图片、Excel财务报表</p>
+                        <button class="mt-3 px-4 py-2 bg-primary text-white rounded hover:bg-blue-600">选择文件上传</button>
+                        <p class="text-xs text-gray-400 mt-2">原型演示：模拟OCR识别与信息抽取</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3.计税申报 -->
+            <section id="page-tax" class="page hidden">
+                <h2 class="text-2xl font-bold mb-6">自动计税与申报</h2>
+                <div class="flex gap-3 mb-6">
+                    <button onclick="calcTax()" class="px-5 py-2 bg-primary text-white rounded hover:bg-blue-600"><i class="fa fa-calculator mr-1"></i> 自动计算税额</button>
+                    <button onclick="declareTax()" class="px-5 py-2 bg-success text-white rounded hover:bg-green-600"><i class="fa fa-send mr-1"></i> 一键批量申报</button>
+                    <button onclick="alert('原型演示：申报表下载功能模拟')" class="px-5 py-2 border rounded hover:bg-gray-50"><i class="fa fa-download mr-1"></i> 下载申报表</button>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+                    <div class="p-4 border-b bg-gray-50 font-semibold">增值税计算结果</div>
+                    <div class="p-4">
+                        <table class="w-full text-sm">
+                            <tr class="border-b">
+                                <td class="py-2 text-gray-500 w-1/2">不含税销售额</td>
+                                <td class="py-2 text-right font-medium" id="vat-no-tax">415,841.58 元</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-2 text-gray-500">适用征收率</td>
+                                <td class="py-2 text-right">1%</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-2 text-gray-500">减免税额（小规模30万免征）</td>
+                                <td class="py-2 text-right text-success" id="vat-reduce">3,000.00 元</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-gray-500 font-semibold">应缴增值税额</td>
+                                <td class="py-2 text-right text-lg font-bold text-primary" id="vat-result">4,158.42 元</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50 font-semibold">企业所得税计算结果</div>
+                    <div class="p-4">
+                        <table class="w-full text-sm">
+                            <tr class="border-b">
+                                <td class="py-2 text-gray-500 w-1/2">利润总额</td>
+                                <td class="py-2 text-right font-medium">140,000.00 元</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-2 text-gray-500">小微企业优惠实际税率</td>
+                                <td class="py-2 text-right">5%</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="py-2 text-gray-500">减免所得税额</td>
+                                <td class="py-2 text-right text-success">28,000.00 元</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-gray-500 font-semibold">应缴企业所得税</td>
+                                <td class="py-2 text-right text-lg font-bold text-primary" id="income-tax-result">7,000.00 元</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4.政策中心 -->
+            <section id="page-policy" class="page hidden">
+                <h2 class="text-2xl font-bold mb-6">税收政策智能匹配</h2>
+                <div class="flex gap-2 mb-4">
+                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">已享受 2项</span>
+                    <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">可享受 1项</span>
+                    <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm">暂不满足 3项</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-success">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">小型微利企业所得税减免政策</h3>
+                                <p class="text-sm text-gray-500 mt-1">应纳税所得额300万以内，减按5%征收企业所得税</p>
+                                <p class="text-xs text-success mt-2">✓ 已匹配，本期减免 28,000 元</p>
+                            </div>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">已享受</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-success">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">增值税小规模纳税人1%征收率优惠</h3>
+                                <p class="text-sm text-gray-500 mt-1">增值税小规模纳税人适用3%征收率的应税销售收入，减按1%征收</p>
+                                <p class="text-xs text-success mt-2">✓ 已匹配，本期减免 8,316.83 元</p>
+                            </div>
+                            <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded">已享受</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-primary">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">小规模纳税人月销售额10万以下免征增值税</h3>
+                                <p class="text-sm text-gray-500 mt-1">季度销售额30万以内免征增值税，超出部分全额征税</p>
+                                <p class="text-xs text-primary mt-2">⚡ 可享受，本期销售额超30万，超出部分正常征税</p>
+                            </div>
+                            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">可享受</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-lg shadow-sm border-l-4 border-gray-300">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-semibold">高新技术企业所得税15%优惠税率</h3>
+                                <p class="text-sm text-gray-500 mt-1">国家重点扶持的高新技术企业，减按15%税率征收企业所得税</p>
+                                <p class="text-xs text-gray-500 mt-2">✕ 暂不满足：未取得高新技术企业资质</p>
+                            </div>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">暂不满足</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5.风险看板 -->
+            <section id="page-risk" class="page hidden">
+                <h2 class="text-2xl font-bold mb-6">涉税风险分析看板</h2>
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+                        <p class="text-3xl font-bold text-success">12</p>
+                        <p class="text-sm text-gray-500 mt-1">低风险项</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+                        <p class="text-3xl font-bold text-warning">2</p>
+                        <p class="text-sm text-gray-500 mt-1">一般风险项</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-sm text-center">
+                        <p class="text-3xl font-bold text-danger">0</p>
+                        <p class="text-sm text-gray-500 mt-1">高风险项</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="p-4 border-b bg-gray-50 font-semibold">风险明细清单</div>
+                    <div class="divide-y">
+                        <div class="p-4 flex items-start gap-3">
+                            <span class="mt-0.5 text-warning"><i class="fa fa-exclamation-circle"></i></span>
+                            <div class="flex-1">
+                                <h4 class="font-medium">成本费用占比略高于行业均值</h4>
+                                <p class="text-sm text-gray-500 mt-1">本期成本费用率66.7%，行业均值约60%，建议核查成本凭证完整性</p>
+                                <p class="text-xs text-gray-400 mt-2">风险等级：一般 | 整改建议：补充成本费用原始凭证，留存备查</p>
+                            </div>
+                        </div>
+                        <div class="p-4 flex items-start gap-3">
+                            <span class="mt-0.5 text-warning"><i class="fa fa-exclamation-circle"></i></span>
+                            <div class="flex-1">
+                                <h4 class="font-medium">部分费用无发票附件标记</h4>
+                                <p class="text-sm text-gray-500 mt-1">系统检测到3笔办公费未上传发票凭证，企业所得税税前扣除需合规凭证</p>
+                                <p class="text-xs text-gray-400 mt-2">风险等级：一般 | 整改建议：补充发票原件，无票支出汇算清缴做纳税调增</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6.智能问答 -->
+            <section id="page-chat" class="page hidden">
+                <h2 class="text-2xl font-bold mb-6">财税智能问答</h2>
+                <div class="bg-white rounded-lg shadow-sm h-[500px] flex flex-col">
+                    <div id="chat-box" class="flex-1 p-4 overflow-auto space-y-4">
+                        <div class="flex gap-2">
+                            <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm"><i class="fa fa-robot"></i></div>
+                            <div class="bg-gray-100 rounded-lg p-3 max-w-md">
+                                您好，我是智慧财税智能助手，支持政策咨询、计税答疑、风险解读，请问有什么可以帮您？
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t flex gap-2">
+                        <input type="text" id="chat-input" placeholder="输入财税问题，例如：小规模纳税人增值税优惠政策" class="flex-1 border rounded px-3 py-2">
+                        <button onclick="sendChat()" class="px-5 py-2 bg-primary text-white rounded hover:bg-blue-600">发送</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7.消息提醒 -->
+            <section id="page-notice" class="page hidden">
+                <h2 class="text-2xl font-bold mb-6">消息提醒中心</h2>
+                <div class="space-y-3">
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-danger">
+                        <div class="flex justify-between">
+                            <h4 class="font-semibold">申报截止提醒</h4>
+                            <span class="text-xs text-gray-400">2026-10-25</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">2026年第三季度增值税、企业所得税申报截止日期为10月28日，请及时完成申报</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-primary">
+                        <div class="flex justify-between">
+                            <h4 class="font-semibold">税收政策更新通知</h4>
+                            <span class="text-xs text-gray-400">2026-10-20</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">财政部发布最新小微企业所得税优惠延续政策，有效期延长至2027年底</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-warning">
+                        <div class="flex justify-between">
+                            <h4 class="font-semibold">涉税风险预警</h4>
+                            <span class="text-xs text-gray-400">2026-10-22</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">检测到2项一般涉税风险，请前往风险看板查看详情并及时整改</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // 页面切换
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            document.getElementById('page-' + pageName).classList.remove('hidden');
+            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-page="${pageName}"]`).classList.add('active');
+        }
+
+        // 保存数据
+        function saveData() {
+            alert('数据已保存，可前往计税申报页面计算税额');
+        }
+
+        // 计税逻辑
+        function calcTax() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const profit = parseFloat(document.getElementById('profit').value) || 0;
+            
+            // 增值税 小规模1%
+            const noTax = income / 1.01;
+            const vat = noTax * 0.01;
+            
+            // 企业所得税 小微企业5%
+            const incomeTax = profit * 0.05;
+
+            document.getElementById('vat-no-tax').textContent = noTax.toFixed(2) + ' 元';
+            document.getElementById('vat-result').textContent = vat.toFixed(2) + ' 元';
+            document.getElementById('income-tax-result').textContent = incomeTax.toFixed(2) + ' 元';
+            alert('税额计算完成');
+        }
+
+        // 模拟申报
+        function declareTax() {
+            if(confirm('确认提交批量申报？（原型演示，不连接真实税务系统）')) {
+                alert('模拟申报提交成功，申报状态：已申报');
+            }
+        }
+
+        // 智能问答模拟
+        function sendChat() {
+            const input = document.getElementById('chat-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML += `
+                <div class="flex gap-2 justify-end">
+                    <div class="bg-primary text-white rounded-lg p-3 max-w-md">${msg}</div>
+                    <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-sm"><i class="fa fa-user"></i></div>
+                </div>
+            `;
+            input.value = '';
+
+            setTimeout(() => {
+                let reply = '抱歉，该问题暂未收录，请咨询专业税务人员。';
+                if(msg.includes('小规模') || msg.includes('增值税')) {
+                    reply = '增值税小规模纳税人现行优惠：1、适用3%征收率的应税销售收入减按1%征收；2、月销售额10万元（季度30万）以下免征增值税。';
+                } else if(msg.includes('小微企业') || msg.includes('企业所得税')) {
+                    reply = '小型微利企业认定标准：从业人数≤300人、资产总额≤5000万、应纳税所得额≤300万。符合条件的，企业所得税实际税率5%。';
+                } else if(msg.includes('申报')) {
+                    reply = '季度申报截止日期通常为季度终了后15日内，遇节假日顺延。可通过电子税务局完成线上申报。';
+                }
+                chatBox.innerHTML += `
+                    <div class="flex gap-2">
+                        <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm"><i class="fa fa-robot"></i></div>
+                        <div class="bg-gray-100 rounded-lg p-3 max-w-md">${reply}</div>
+                    </div>
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 500);
+        }
+    </script>
+</body>
+</html>
